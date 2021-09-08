@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-function App() {
+import HomePage from './pages/HomePage'
+import Form from './pages/Form'
+import Horoscope from './pages/Horoscope'
+import { AppContainer } from './elements/app'
+import HoroscopeRoute from './routes/HoroscopeRoute'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AppContainer>
+      <BrowserRouter>
+        <Switch>
+          <HoroscopeRoute exact path="/horoscope">
+            <Horoscope />
+          </HoroscopeRoute>
+          <Route exact component={Form} path="/form" />
+          <Route exact component={HomePage} path="/" />
+          <Redirect to="/" />
+        </Switch>
+      </BrowserRouter>
+    </AppContainer>
+  )
 }
 
-export default App;
+export default App
